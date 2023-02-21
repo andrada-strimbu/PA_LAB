@@ -1,0 +1,4 @@
+-am afisat "Hello World"
+-am generat un numar si am facut calcule cu el
+-am calculat suma cifrelor numarului obtinut pana am ajuns la o singura cifra (valoarea se afla in "suma")
+-am afisat string-ul "a" si elementul languages[suma]
