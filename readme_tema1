@@ -1,0 +1,8 @@
+-am creat 3 metode("afisare", "latin_square", "main")
+- am citit de la linia de comanda un string si l-am transformat in int cu ajutorul functiei Integer.parseInt();
+-ulterior am apelat medota public static void latin_square(int n) in care se creeaza o matrice ce corespunde cerintei.
+-latin_square creaza matricea in mod corect deoarece fiecare linie este creata deplasand elementul de pe prima pozitie cu o pozitie
+-dupa creearea matricei apelam functia "afisare" care creaza string-uri pentru linii si string-uri pentru coloane
+-daca numarul dat la linia de comanda este mai mare decat 30000 atunci folosim functia final long b = System.nanoTime() la inceputul executiei 
+pentru a avea timpul initial si la finalul executiei pentru a avea timpul final si afisam diferenta pentru a obtine timpul de executie.
+-pentru ca a nu afisa string-urile pentru numerele mai mari de 30000 am pus doua if;
