@@ -1,30 +1,63 @@
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
-        String languages[] = {"C", "C++", "C#", "Python", "Go", "Rust", "JavaScript", "PHP", "Swift", "Java"};
-        String a[] = {"Willy-nilly, this semester I will learn"};
-        int n = (int) (Math.random() * 1_000_000);
-        int suma=0;
-        n=n*3;
-        n=n+0b10101;
-        n=n+0xFF;
-        n=n*6;
-        while(n>0)
-        {suma=suma+n%10;
-            n=n/10;
-        }
-        while(suma>9)
-        {  int aux=suma;
-            int suma1=0;
-            while(aux>0){
-                suma1=suma1+aux%10;
-                aux=aux/10;
-            }
-            suma=suma1;
-        }
-        System.out.println(suma);
-        System.out.println(a[0]);
-        System.out.println(languages[suma]);
 
+    public static void afisare(int a[][], int x) {
+        String y = "";
+        String k = "";
+
+            for (int i = 0; i < x; i++) {
+                for (int j = 0; j < x; j++) {
+                    y = y + a[i][j];
+                }
+                if (x < 30000) {
+                    System.out.println(y);
+                }
+                y = "";
+            }
+            System.out.println();
+            for (int j = 0; j < x; j++) {
+                for (int i = 0; i < x; i++) {
+                    k = k + a[i][j];
+                }
+                if (x < 30000) {
+                    System.out.println(k);
+                }
+
+                k = "";
+
+            }
+
+
+    }
+
+    public static void latin_square(int n) {
+        int a[][] = new int[n][n];
+        //int k=n+1;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++) {
+                int rez = (i + j + 1) % n;
+                if (rez == 0) {
+                    a[i][j] = n;
+                } else {
+                    a[i][j] = rez;
+                }
+            }
+        afisare(a, n);
+    }
+
+    public static void main(String[] args) {
+        final long b = System.nanoTime();
+        if (args.length != 1) {
+            System.out.println("scrie un numar:");
+            return;
+        }
+        String s1 = args[0];
+        int n = 0;
+        n = Integer.parseInt(s1);
+
+        latin_square(n);
+        if (n >= 30000) {
+            final long time= System.nanoTime()-b;
+          System.out.println(time);
+        }
     }
 }
