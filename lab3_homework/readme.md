@@ -1,1 +1,11 @@
-
+-Avem interfata Node ce contine ca metode abstracte getName(), ce returneaza numele nodului si getID(), ce returneaza id ul nodului
+-Clasa Company implementeaza interfata Node si Comparable
+-In Company facem overrride la compartTo unde comparatia se face intre nume
+-Clasa Person implementeaza interfata Node si Comparable
+-Relationship este un hashmap de tip <Node,String>
+-In metoda addRelationship verificam intai daca nodul introdus la relationship este null intai. Daca e null dam throw la eroare
+-Clasele Programmer si Designer ce extind clasa Person si doar adauga un field unic
+-Avem clasa Network ce are ca field O lista de tip Nodes
+-Dam cast la Node la clasa la care este defapt (programmer,designer) si in variabila numberofKeys punem sizeul setului de key a hashmapului nodului respectiv
+-Numarul de key reprezinta numarul de relatii
+-Facem ovverride la toString unde intai ordonam lista de Noduri descrescator dupa Numarul de key 
