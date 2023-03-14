@@ -1,1 +1,4 @@
-
+-Am modelat clasele Student si Project si am implementat Comparable pentru a sorta numele.
+-Am dat override la metoda toString
+-Am creat linkedList care imi transforma un array intr-o lista inlantuita
+-Am creat treeSet care imi trasnforma un array intr-un Tree Set
