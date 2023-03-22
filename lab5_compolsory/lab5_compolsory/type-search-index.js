@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.example","l":"Catalog"},{"p":"org.example","l":"CatalogUtil"},{"p":"org.example","l":"Document"},{"p":"org.example","l":"InvalidCatalogException"},{"p":"org.example","l":"Main"}];updateSearchResults();
