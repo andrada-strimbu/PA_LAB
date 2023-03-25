@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: org.example.Main
+Class-Path: jackson-core-2.13.2.jar jackson-databind-2.13.2.jar jackson-
+ annotations-2.13.2.jar freemarker-2.3.32.jar
+
