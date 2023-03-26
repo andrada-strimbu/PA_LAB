@@ -26,9 +26,9 @@
 <table>
     <thead>
     <tr>
-        <th>Product Name</th>
-        <th>Description</th>
-        <th>Price</th>
+        <th>ID</th>
+        <th>TITLE</th>
+        <th>LOCATION</th>
     </tr>
     </thead>
     <tbody>
@@ -43,6 +43,11 @@
 </table>
 </body>
 </html>
+
+
+
+
+
 
 
 
