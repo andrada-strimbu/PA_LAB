@@ -1,0 +1,4 @@
+-am modelat problema
+-am regandit clasa DrawingPanel
+-am creat butoanele Save si Load 
+-am salvat DrawingPanel PNG
