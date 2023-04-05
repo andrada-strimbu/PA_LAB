@@ -1,32 +1,33 @@
 package org.example;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Exploration {
-    int n;
-    private Cell[][] matrix;
-    private final SharedMemory mem = new SharedMemory(n);
-    private final ExplorationMap map = new ExplorationMap(matrix);
-    private final List<Robot> robots = new ArrayList<>();
-//...
-    public void start() {
-        for (Robot robot : robots) {
-            //start a new Thread representing the robot;
+    private List<Robot> robots;
+    private ExplorationMap explorationMap;
+    private SharedMemory sharedMemory;
+
+    public Exploration(int n, int numRobots) {
+        explorationMap = new ExplorationMap(n);
+        sharedMemory = new SharedMemory(n * n);
+        robots = new ArrayList<>();
+        for (int i = 0; i < numRobots; i++) {
+            Robot robot = new Robot("Robot " + (i + 1), explorationMap, sharedMemory);
+            robots.add(robot);
         }
     }
-    public static void main(String args[]) {
-        var explore = new Exploration();
-        explore.addRobot(new Robot("Wall-E"));
-        explore.addRobot(new Robot("R2D2"));
-        explore.addRobot(new Robot("Optimus Prime"));
-        explore.start();
+
+    public void startExploration() {
+        for (Robot robot : robots) {
+            Thread t = new Thread(robot);
+            t.start();
+        }
     }
 
-    private void addRobot(Robot robot) {
-    }
 
-    public ExplorationMap getMap() {
-    return null;
+    public void stopExploration() {
+        for (Robot robot : robots) {
+            robot.setRunning(false);
+        }
     }
 }

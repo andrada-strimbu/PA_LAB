@@ -5,27 +5,21 @@ import java.util.Collections;
 import java.util.List;
 
 public class SharedMemory {
-    private final List<Token> tokens=new ArrayList<>();
-    public SharedMemory(int n) {
-        for(int i=0;i<n;i++) {
-            Token token = new Token(i);
-            tokens.add(token);
+    private final List<Token> tokens;
+
+
+    public SharedMemory(int numTokens) {
+        tokens = new ArrayList<>();
+        for (int i = 1; i <= numTokens; i++) {
+            tokens.add(new Token(i));
         }
         Collections.shuffle(tokens);
-
     }
-    public synchronized List<Token> extractTokens(int howMany) {
-        List<Token> extracted = new ArrayList<>();
-        for (int i = 0; i < howMany; i++) {
-            if (tokens.isEmpty()) {
-                break;
-            }
-            extracted.add(tokens.remove(0));
 
-
+    public synchronized Token takeToken() {
+        if (tokens.isEmpty()) {
+            return null;
         }
-        return extracted;
+        return tokens.remove(0);
     }
-
-
 }

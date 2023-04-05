@@ -1,33 +1,36 @@
 package org.example;
 
-import java.util.List;
 
 public class ExplorationMap {
-    private final Cell[][] matrix;
+    private final int[][] cells;
+    private final int n;
 
-    public ExplorationMap(Cell[][] matrix) {
-        this.matrix = matrix;
+    public ExplorationMap(int n) {
+        this.n = n;
+        cells = new int[n][n];
     }
 
 
-    //Cell should be a wrapper or alias for List<Token>
-    public boolean visit(int row, int col, Robot robot) {
-        synchronized (matrix[row][col]) {
-            int n= matrix.length;
-            if (matrix[row][col].isVisited()) {
-                SharedMemory sharedMemory= new SharedMemory(n);
-                List<Token> extractedToken = sharedMemory.extractTokens(2);
-                matrix[row][col].setVisited(true);
-                System.out.println("Successfully visited cell (" + row + ", " + col + ")");
-                return true;
-            }
+    public synchronized boolean visitCell(int x, int y) {
+        if (cells[x][y] != 0) {
+            return false;
         }
-        System.out.println("Visit unsuccessful");
-        return false;
+        cells[x][y] = 1;
+        return true;
     }
 
-    @Override
-    public String toString() {
-       return null;
+
+    public boolean isValidPosition(int x, int y) {
+        return x >= 0 && x < n && y >= 0 && y < n;
+    }
+
+
+
+    public synchronized void addToken(int x, int y, int value) {
+        cells[x][y] = value;
+    }
+
+    public int getN() {
+        return n;
     }
 }
