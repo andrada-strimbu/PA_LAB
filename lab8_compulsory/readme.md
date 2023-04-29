@@ -1,4 +1,4 @@
-- -----------------COMPULSORY-----------------
+------------------COMPULSORY-----------------
 
 Create a relational database using any RDBMS (Oracle, Postgres, MySql, Java DB, etc.).
 Write an SQL script that will create the following tables:
@@ -27,7 +27,7 @@ Create a tool to import data from a real dataset, such as Rolling Stone's 500 Gr
 - Am modificat Database si am utilizat HikariCP, am adaugat dependentele in pom.xml;
 - Am creat clasa ImportDataTool care populeaza tabelele create in pgAdmin cu ajutorul datelor din "albumlist.csv"; 
 
-- -----------------BONUS-----------------
+------------------BONUS-----------------
 Extend the model in order to create playlists. A playlist has a name, a creation timestamp and a set of albums.
 Two albums are related if they meet at least one of the following conditions: are composed by the same artist or have been released in the same year or have at least one common genre.
 Create an algorithm that generates maximal playlists (all of them or a limited number, if there are too many) that contain only unrelated albums.
