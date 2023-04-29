@@ -17,7 +17,7 @@ Implement a simple test using your classes.
 - Am creat clasa Database care conecteaza clasele create in java cu baza de date din postgres;
 - Am creat operatiile CRUD pentru tabela Albums;
 
-- -----------------OPTIONAL-----------------
+------------------OPTIONAL-----------------
 Create an object-oriented model of the data managed by the Java application.
 Implement all the DAO classes.
 Use a connection pool in order to manage database connections, such as C3PO, HikariCP or Apache Commons DBCP.
