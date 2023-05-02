@@ -8,7 +8,7 @@ Verify the presence of the persistence.xml file in your project. Make sure that 
 - - findById - returns an entity based on its primary key;
 - - findByName - returns a list of entities that match a given name pattern. Use a named query in order to implement this method.
 - Test your application.
-
+----------------------------------------------------------------
 - Am creat un persistence.xml in proiectul meu si am adaugat toate dependentele in pom.xml;
 - Am definit pentru toate clasele mele entitatile;
 - Am creat clasa EntityManagerFactory care ma juta sa ma conectez cu baza de date prin intermediul persistence.xml;
