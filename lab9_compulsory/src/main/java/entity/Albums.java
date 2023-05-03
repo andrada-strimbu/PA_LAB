@@ -4,8 +4,14 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@NamedQuery(name = "Album.byGenre", query = "SELECT a FROM Albums a WHERE a.genre = ?1")
-@NamedQuery(name = "Album.findByName",query = "SELECT a FROM Albums a WHERE a.title =:title")
+@NamedQueries({
+        @NamedQuery(name = "Album.findAll",
+                query = "select e from Albums e order by e.title"),
+        @NamedQuery(name = "Album.findByArtist",
+                query = "select e from Albums e where e.artist = ?1"),
+        @NamedQuery(name = "Albums.findByTitle",
+                query = "select a from Albums a where a.title = :title")
+})
 public class Albums {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

@@ -32,7 +32,7 @@ public class AlbumsRepositoryTest {
         album.setTitle("Abbey Road");
         album.setArtist("The Beatles");
         album.setReleaseYear(1969);
-        albumsRepository.create(album);
+        albumsRepository.createAlbum(album);
     }
 
     @AfterEach
@@ -54,15 +54,15 @@ public class AlbumsRepositoryTest {
 
     @Test
     public void testFindById() {
-        Albums result = albumsRepository.findById((long) album.getId());
+        Albums result = albumsRepository.findById( album.getId());
         assertEquals(album, result);
     }
 
     @Test
     public void testFindByName() {
-        List<Albums> results = albumsRepository.findByName("Abbey");
-        assertEquals(1, results.size());
-        assertEquals(album, results.get(0));
+        List<Albums> results = (List<Albums>) albumsRepository.findByTitle(album.getTitle());
+        assertEquals(album, results);
+        //assertEquals(album, results.get(0));
     }
 }
 

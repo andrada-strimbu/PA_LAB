@@ -2,14 +2,28 @@ import entity.Albums;
 import repository.AlbumsRepository;
 
 import javax.persistence.*;
+import java.sql.SQLException;
 
 public class Main {
-    public static void main(String[] args) {
-        AlbumsRepository repository=new AlbumsRepository();
-        Albums album1=new Albums(501,2016,"Anti","Rihanna","pop");
-        repository.create(album1);
-        Albums album2=repository.findById(1L);
-        System.out.println(album2.getTitle());
+    public static void main(String[] args) throws SQLException {
+        Albums album = new Albums();
+        album.setId(501);
+        album.setArtist("Rihanna");
+        album.setReleaseYear(2016);
+        album.setTitle("Anti");
+        album.setGenre("pop");
+
+        AlbumsRepository albumsRepository = new AlbumsRepository();
+        albumsRepository.createAlbum(album);
+        System.out.println("Added album: " + album.toString());
+
+        album = albumsRepository.findById(1);
+        System.out.println("Found album by id:"+ album.toString());
+
+        album = albumsRepository.findByTitle("Acele");
+        System.out.println("Found album by title:"+ album.toString());
+
+        albumsRepository.close();
 
     }
 }

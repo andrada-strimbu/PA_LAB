@@ -1,37 +1,40 @@
 package repository;
-
 import entity.Albums;
-import entity.EntityManagerFactorySingleton;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
 
 public class AlbumsRepository {
-
     private EntityManager entityManager;
-
-    public AlbumsRepository() {
-
+    private EntityManagerFactory managerFactory;
+    public AlbumsRepository(){
+        this.managerFactory = Persistence.createEntityManagerFactory("lab9_compulsory2");
+        this.entityManager = managerFactory.createEntityManager();
     }
-
-    public void create(Albums album) {
-        EntityManagerFactory entityManagerFactory = EntityManagerFactorySingleton.getEntityManagerFactory();
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+    public Albums createAlbum(Albums album){
         entityManager.getTransaction().begin();
         entityManager.persist(album);
         entityManager.getTransaction().commit();
-        entityManager.close();
+        return album;
     }
-    public Albums findById(Long id) {
-        EntityManagerFactory entityManagerFactory = EntityManagerFactorySingleton.getEntityManagerFactory();
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Albums albums = entityManager.find(Albums.class, id);
-        entityManager.close();
-        return albums;
+    public Albums findById(Integer id){
+        return entityManager.find(Albums.class, id);
     }
-    public List<Albums> findByName(String title) {
-        Query query = entityManager.createNamedQuery("Album.findByName", Albums.class);
-        query.setParameter("title", "%" + title + "%");
-        return query.getResultList();
+    public Albums findByTitle(String title){
+        Query query = entityManager.createNamedQuery("Albums.findByTitle");
+        query.setParameter("title", title);
+        return (Albums) query.getSingleResult();
+    }
+    public void delete(Albums album){
+        entityManager.getTransaction().begin();
+        entityManager.remove(album);
+        entityManager.getTransaction().commit();
+    }
+    public void close(){
+        this.entityManager.close();
+        this.managerFactory.close();
     }
 }
