@@ -1,23 +1,34 @@
 package entity;
-
 import javax.persistence.*;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "genres", schema = "public", catalog = "lab8")
 public class Genres {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
-    @Basic
+    private Integer id;
+
     @Column(name = "name")
     private String name;
 
-    public int getId() {
+    @ManyToMany(mappedBy = "genresSet", fetch = FetchType.LAZY)
+    private Set<Albums> albumsSet = new HashSet<>();
+
+    public Genres() {
+    }
+
+    public Genres(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -29,16 +40,13 @@ public class Genres {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Genres genres = (Genres) o;
-        return id == genres.id && Objects.equals(name, genres.name);
+    public Set<Albums> getAlbumsSet() {
+        return albumsSet;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
+    public void setAlbumsSet(Set<Albums> albumsSet) {
+        this.albumsSet = albumsSet;
     }
+
+
 }

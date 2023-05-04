@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "artists", schema = "public", catalog = "lab8")
 public class Artists {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
     @Column(name = "id")
     private int id;
-
+    @Id
     @Column(name = "name")
     private String name;
 

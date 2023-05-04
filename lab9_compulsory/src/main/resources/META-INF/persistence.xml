@@ -6,6 +6,9 @@
     <persistence-unit name="lab9_compulsory2" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>entity.Albums</class>
+        <class>entity.Genres</class>
+
+
 
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
@@ -16,6 +19,7 @@
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
+
         </properties>
     </persistence-unit>
 </persistence>

@@ -4,53 +4,48 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "albums_genres", schema = "public", catalog = "lab8")
+@Table(name = "album_genres")
 public class AlbumsGenres {
-    @Basic
-    @Column(name = "album_id")
-    private int albumId;
-    @Basic
-    @Column(name = "genre_id")
-    private int genreId;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    public int getAlbumId() {
-        return albumId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "album_id")
+    private Albums album;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "genre_id")
+    private Genres genre;
+
+    public AlbumsGenres() {}
+
+    public AlbumsGenres(Albums album, Genres genre) {
+        this.album = album;
+        this.genre = genre;
     }
 
-    public void setAlbumId(int albumId) {
-        this.albumId = albumId;
-    }
-
-    public int getGenreId() {
-        return genreId;
-    }
-
-    public void setGenreId(int genreId) {
-        this.genreId = genreId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AlbumsGenres that = (AlbumsGenres) o;
-        return albumId == that.albumId && genreId == that.genreId && id == that.id;
+    public Albums getAlbum() {
+        return album;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(albumId, genreId, id);
+    public void setAlbum(Albums album) {
+        this.album = album;
     }
+
+    public Genres getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genres genre) {
+        this.genre = genre;
+    }
+
+
+
+
 }

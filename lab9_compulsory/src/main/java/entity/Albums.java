@@ -1,7 +1,11 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Album.findAll",
@@ -11,24 +15,38 @@ import java.util.Objects;
         @NamedQuery(name = "Albums.findByTitle",
                 query = "select a from Albums a where a.title = :title")
 })
-@Table(name = "albums", schema = "public", catalog = "postgres")
+
+@Table(name = "albums", schema = "public", catalog = "lab8")
 public class Albums {
     @Id
-    @Basic
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
-    @Basic
+
     @Column(name = "release_year")
     private Integer releaseYear;
-    @Basic
+
     @Column(name = "title")
     private String title;
-    @Basic
-    @Column(name = "artist")
-    private String artist;
-    @Basic
-    @Column(name = "genre")
-    private String genres;
+
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artists artist;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "album_genres",
+            joinColumns = @JoinColumn(name = "album_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    private Set<Genres> genresSet = new HashSet<>();
+
+    public Albums() {
+    }
+
+    public Albums(Integer releaseYear, String title, Artists artist) {
+        this.releaseYear = releaseYear;
+        this.title = title;
+        this.artist = artist;
+    }
 
     public Integer getId() {
         return id;
@@ -54,43 +72,26 @@ public class Albums {
         this.title = title;
     }
 
-    public String getArtist() {
+    public Artists getArtist() {
         return artist;
     }
 
-    public void setArtist(String artist) {
+    public void setArtist(Artists artist) {
         this.artist = artist;
     }
 
-    public String getGenres() {
-        return genres;
+    public Set<Genres> getGenresSet() {
+        return genresSet;
     }
 
-    public void setGenres(String genres) {
-        this.genres = genres;
+    public void setGenresSet(Set<Genres> genresSet) {
+        this.genresSet = genresSet;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Albums that = (Albums) o;
-        return Objects.equals(id, that.id) && Objects.equals(releaseYear, that.releaseYear) && Objects.equals(title, that.title) && Objects.equals(artist, that.artist) && Objects.equals(genres, that.genres);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, releaseYear, title, artist, genres);
-    }
-
-    @Override
-    public String toString() {
-        return "AlbumsEntity{" +
-                "id=" + id +
-                ", releaseYear=" + releaseYear +
-                ", title='" + title + '\'' +
-                ", artist='" + artist + '\'' +
-                ", genres='" + genres + '\'' +
-                '}';
+    public void addGenre(Genres genre) {
+        this.genresSet.add(genre);
+        genre.getAlbumsSet().add(this);
     }
 }
+
+
