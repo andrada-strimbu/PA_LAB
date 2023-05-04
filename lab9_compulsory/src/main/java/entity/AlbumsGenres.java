@@ -4,18 +4,18 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "album_genres")
+@Table(name = "albums_genres")
 public class AlbumsGenres {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "album_id")
+    @JoinColumn(name = "album_id",referencedColumnName = "id")
     private Albums album;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "genre_id")
+    @JoinColumn(name = "genre_id",referencedColumnName = "id")
     private Genres genre;
 
     public AlbumsGenres() {}
