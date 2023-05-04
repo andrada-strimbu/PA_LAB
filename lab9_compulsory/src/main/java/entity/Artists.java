@@ -9,7 +9,7 @@ public class Artists {
     @Id
     @Column(name = "id")
     private int id;
-    @Basic
+
     @Column(name = "name")
     private String name;
 

@@ -2,7 +2,6 @@ package entity;
 
 import javax.persistence.*;
 import java.util.Objects;
-
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Album.findAll",
@@ -12,11 +11,12 @@ import java.util.Objects;
         @NamedQuery(name = "Albums.findByTitle",
                 query = "select a from Albums a where a.title = :title")
 })
+@Table(name = "albums", schema = "public", catalog = "postgres")
 public class Albums {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @Basic
     @Column(name = "id")
-    private int id;
+    private Integer id;
     @Basic
     @Column(name = "release_year")
     private Integer releaseYear;
@@ -28,26 +28,13 @@ public class Albums {
     private String artist;
     @Basic
     @Column(name = "genre")
-    private String genre;
+    private String genres;
 
-    public Albums(int id,Integer releaseYear, String title, String artist, String genre) {
-        this.id=id;
-        this.releaseYear = releaseYear;
-        this.title = title;
-        this.artist = artist;
-        this.genre = genre;
-    }
-
-    public Albums() {
-
-    }
-
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -75,24 +62,35 @@ public class Albums {
         this.artist = artist;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getGenres() {
+        return genres;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setGenres(String genres) {
+        this.genres = genres;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Albums albums = (Albums) o;
-        return id == albums.id && Objects.equals(releaseYear, albums.releaseYear) && Objects.equals(title, albums.title) && Objects.equals(artist, albums.artist) && Objects.equals(genre, albums.genre);
+        Albums that = (Albums) o;
+        return Objects.equals(id, that.id) && Objects.equals(releaseYear, that.releaseYear) && Objects.equals(title, that.title) && Objects.equals(artist, that.artist) && Objects.equals(genres, that.genres);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, releaseYear, title, artist, genre);
+        return Objects.hash(id, releaseYear, title, artist, genres);
+    }
+
+    @Override
+    public String toString() {
+        return "AlbumsEntity{" +
+                "id=" + id +
+                ", releaseYear=" + releaseYear +
+                ", title='" + title + '\'' +
+                ", artist='" + artist + '\'' +
+                ", genres='" + genres + '\'' +
+                '}';
     }
 }
