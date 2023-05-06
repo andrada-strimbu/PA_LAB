@@ -16,9 +16,9 @@ public class Artists {
     @Id
     @Column(name = "name")
     private String name;
-   @ManyToOne
-   @JoinColumn(name="artist")
-   private Albums albums;
+    @ManyToOne
+    @JoinColumn(name="artist")
+    private Albums albums;
 
     public int getId() {
         return id;

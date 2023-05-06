@@ -19,7 +19,10 @@ public class AlbumsGenres implements Serializable {
     public AlbumsGenres() {
     }
 
-
+    public AlbumsGenres(Integer artist_id, Integer genre_id) {
+        this.artist_id = artist_id;
+        this.genre_id = genre_id;
+    }
 
     public Integer getId() {
         return id;

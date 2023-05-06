@@ -1,52 +1,16 @@
 package repository;
-
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-public abstract class AbstractRepository<T extends Serializable> {
+public interface AbstractRepository<T> {
 
-    private final SessionFactory sessionFactory;
-    private final Class<T> entityClass;
+    T findById(Integer id);
 
-    @SuppressWarnings("unchecked")
-    public AbstractRepository(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-        this.entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-    }
+    List<T> findAll();
 
-    protected Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
+    void save(T t);
 
-    public void save(T entity) {
-        Transaction transaction = getSession().beginTransaction();
-        getSession().save(entity);
-        transaction.commit();
-    }
+    void update(T t);
 
-    public void update(T entity) {
-        Transaction transaction = getSession().beginTransaction();
-        getSession().update(entity);
-        transaction.commit();
-    }
+    void delete(T t);
 
-    public void delete(T entity) {
-        Transaction transaction = getSession().beginTransaction();
-        getSession().delete(entity);
-        transaction.commit();
-    }
-
-    public T findById(Integer id) {
-        return getSession().get(entityClass, id);
-    }
-
-    @SuppressWarnings("unchecked")
-    public List<T> findAll() {
-        return getSession().createQuery("from " + entityClass.getName()).list();
-    }
 }
