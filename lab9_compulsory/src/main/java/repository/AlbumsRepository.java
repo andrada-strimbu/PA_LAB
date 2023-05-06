@@ -21,6 +21,7 @@ public class AlbumsRepository {
         return album;
     }
     public Albums findById(Integer id){
+
         return entityManager.find(Albums.class, id);
     }
     public Albums findByTitle(String title){

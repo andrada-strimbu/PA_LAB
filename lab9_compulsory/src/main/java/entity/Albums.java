@@ -1,10 +1,7 @@
 package entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @NamedQueries({
@@ -28,24 +25,25 @@ public class Albums {
 
     @Column(name = "title")
     private String title;
-
     @ManyToOne
     @JoinColumn(name = "artist_id")
     private Artists artist;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "album_genres",
-            joinColumns = @JoinColumn(name = "album_id"),
-            inverseJoinColumns = @JoinColumn(name = "genre_id"))
-    private Set<Genres> genresSet = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "genre_id")
+    private Genres genre;
 
-    public Albums() {
-    }
 
-    public Albums(Integer releaseYear, String title, Artists artist) {
+    public Albums(Integer id, Integer releaseYear,Artists artist, String title, Genres genre) {
+        this.id = id;
         this.releaseYear = releaseYear;
         this.title = title;
-        this.artist = artist;
+        this.artist=artist;
+        this.genre = genre;
+    }
+
+    public Albums() {
+
     }
 
     public Integer getId() {
@@ -72,6 +70,7 @@ public class Albums {
         this.title = title;
     }
 
+
     public Artists getArtist() {
         return artist;
     }
@@ -80,17 +79,12 @@ public class Albums {
         this.artist = artist;
     }
 
-    public Set<Genres> getGenresSet() {
-        return genresSet;
+    public Genres getGenre() {
+        return genre;
     }
 
-    public void setGenresSet(Set<Genres> genresSet) {
-        this.genresSet = genresSet;
-    }
-
-    public void addGenre(Genres genre) {
-        this.genresSet.add(genre);
-        genre.getAlbumsSet().add(this);
+    public void setGenre(Genres genre) {
+        this.genre = genre;
     }
 }
 

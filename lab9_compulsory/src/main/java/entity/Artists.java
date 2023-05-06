@@ -1,17 +1,24 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "artists", schema = "public", catalog = "lab8")
 public class Artists {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
     @Id
     @Column(name = "name")
     private String name;
+   @ManyToOne
+   @JoinColumn(name="artist")
+   private Albums albums;
 
     public int getId() {
         return id;
@@ -29,16 +36,5 @@ public class Artists {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Artists artists = (Artists) o;
-        return id == artists.id && Objects.equals(name, artists.name);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
-    }
 }

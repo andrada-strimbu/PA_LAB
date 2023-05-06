@@ -1,50 +1,33 @@
 package entity;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "albums_genres")
-public class AlbumsGenres {
+public class AlbumsGenres implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
+    @Column(name="artist_id")
+    private Integer artist_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "album_id",referencedColumnName = "id")
-    private Albums album;
+    @Column(name="genre_id")
+    private Integer genre_id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "genre_id",referencedColumnName = "id")
-    private Genres genre;
+    public AlbumsGenres() {
+    }
 
-    public AlbumsGenres() {}
 
-    public AlbumsGenres(Albums album, Genres genre) {
-        this.album = album;
-        this.genre = genre;
+
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public Albums getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(Albums album) {
-        this.album = album;
-    }
-
-    public Genres getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genres genre) {
-        this.genre = genre;
-    }
-
 
 
 
