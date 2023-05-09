@@ -26,11 +26,11 @@ public class Albums {
     @Column(name = "title")
     private String title;
     @ManyToOne
-    @JoinColumn(name = "artist_id")
+    @JoinColumn(name = "artist")
     private Artists artist;
 
     @ManyToOne
-    @JoinColumn(name = "genre_id")
+    @JoinColumn(name = "genre")
     private Genres genre;
 
 
