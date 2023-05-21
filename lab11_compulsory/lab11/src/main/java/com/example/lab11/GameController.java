@@ -35,7 +35,7 @@ public class GameController {
                 return game;
             }
         }
-        return null; 
+        return null;
     }
 
     @DeleteMapping("/{id}")
